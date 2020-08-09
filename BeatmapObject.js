@@ -31,6 +31,8 @@ class BeatmapObject {
     }
 
     async calculateWithMods() {
+        if (this.options.combo && this.options.combo > this.maxCombo) this.options.combo = this.maxCombo;
+        
         let mapCalculater = new MapCalculater(this.beatmapId, this.maxCombo, this.options);
         let resultPP = await mapCalculater.calculatePP();
         let resultStat = mapCalculater.calculateStatWithMods({ ar: this.ar, od: this.od, hp: this.hp, cs: this.cs }, this.options.mods);
@@ -74,7 +76,7 @@ class BeatmapObject {
         let output = "";
         output = output + this.beatmapSetId + " " + this.artist + " - " + this.title + "[" + this.diff + "] // " + this.creator + "\n";
         output = output + "★" + this.stars.toFixed(2) + " BPM: " + this.bpm.toFixed(0) + "\n";
-        output = output + "CS/AR/OD/HP: " + this.cs.toFixed(1) + " / "+ this.ar.toFixed(1) + " / "+ this.od.toFixed(1) + " / "+ this.hp.toFixed(1) + "\n";
+        output = output + "CS/AR/OD/HP: " + this.cs.toFixed(1) + " / " + this.ar.toFixed(1) + " / " + this.od.toFixed(1) + " / " + this.hp.toFixed(1) + "\n";
         output = output + "Length: " + utils.gethitLengthString(this.length) + "(" + this.maxCombo + "x)\n";
         output = output + "osu.ppy.sh/b/" + this.beatmapId;
         return output;

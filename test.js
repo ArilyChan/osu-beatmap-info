@@ -2,7 +2,7 @@
 
 const OsuBeatmapInfo = require("./index");
 let obi = new OsuBeatmapInfo({
-    apiKey: "*********************************",
+    apiKey: require("./apiToken.json").apiToken,
     toMappoolRowCmd: "m",
     toCalPPStringCmd: "c",
     prefix: "?",

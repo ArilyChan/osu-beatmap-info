@@ -48,7 +48,7 @@ osu.ppy.sh/b/2300458
 
 输入：
 ```
-!calpp 2300458 +HRDT 95.98% 859x 2m
+!calpp 2300458 +HRDT 95.98% 459x 2m
 ```
 输出：
 ```
@@ -57,11 +57,9 @@ set： 1101166 模式： Standard 状态： graveyard
 CS5.2  AR11.0  OD11.0  HP9.8
 BPM: 264 stars: 6.86 max Combo： 674  时长： 01:56
 
-结算 combo: 859  95.98%  2 miss
+结算 combo: 459  95.98%  2 miss
 使用mod：HRDT
 计算stars：6.86 stars (3.72 aim, 2.58 speed)
-计算pp：423.37 pp (285.09 aim, 94.06 speed, 24.94 acc)
+计算pp：265.04 pp (172.68 aim, 56.97 speed, 24.94 acc)
 osu.ppy.sh/b/2300458
-```
-
 ```
