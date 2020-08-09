@@ -23,12 +23,12 @@ class OsuBeatmapInfo {
      * 获得返回消息
      * @param {String} message 输入的消息
      */
-    apply(message) {
+    async apply(message) {
         try {
             if (!message.length || message.length < 2) return "";
             if (message.substring(0, 1) !== this.prefix && message.substring(0, 1) !== this.prefix2) return "";
             let cmd = new Command(message.substring(1));
-            let reply = cmd.apply(this.toMappoolRowCmd, this.toCalPPStringCmd, this.apiKey);
+            let reply = await cmd.apply(this.toMappoolRowCmd, this.toCalPPStringCmd, this.apiKey);
             return reply;
         } catch (ex) {
             console.log(ex);
