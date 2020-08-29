@@ -6,17 +6,24 @@ class OsuBeatmapInfo {
     /**
      * @param {Object} params 
      * @param {String} params.apiKey osu Api token，必要
-     * @param {String} params.toMappoolRowCmd 输出为mappool行格式的指令，默认为mappoolrow
-     * @param {String} params.toCalPPStringCmd 输出为谱面详细信息的指令，默认为calpp
-     * @param {String} params.prefix 指令前缀，必须为单个字符，默认为!
-     * @param {String} params.prefix2 备用指令前缀，必须为单个字符，默认为！
+     * @param {String} [params.toMappoolRowCmd] 输出为mappool行格式的指令，默认为mappoolrow
+     * @param {String} [params.toCalPPStringCmd] 输出为谱面详细信息的指令，默认为calpp
+     * @param {Array<String>} [params.prefixs] 指令前缀，必须为单个字符，默认为[!,！]
+     * @param {String} [params.prefix] 兼容旧版，指令前缀，必须为单个字符，默认为!
+     * @param {String} [params.prefix2] 兼容旧版，备用指令前缀，必须为单个字符，默认为！
      */
     constructor(params) {
         this.apiKey = params.apiKey || "";
         this.toMappoolRowCmd = params.toMappoolRowCmd || "mappoolrow";
         this.toCalPPStringCmd = params.toCalPPStringCmd || "calpp";
-        this.prefix = params.prefix || "!";
-        this.prefix2 = params.prefix2 || "！";
+        if (params.prefix || params.prefix2) {
+            this.prefix = params.prefix || "!";
+            this.prefix2 = params.prefix2 || "！";
+            this.prefixs = [this.prefix, this.prefix2];
+        }
+        else {
+            this.prefixs = params.prefixs || ["!", "！"];
+        }
     }
 
     /**
@@ -26,8 +33,8 @@ class OsuBeatmapInfo {
     async apply(message) {
         try {
             if (!message.length || message.length < 2) return "";
-            if (message.substring(0, 1) !== this.prefix && message.substring(0, 1) !== this.prefix2) return "";
-            let cmd = new Command(message.substring(1));
+            if (this.prefixs.indexOf(message.substring(0, 1)) < 0) return "";
+            let cmd = new Command(message.substring(1).trim());
             let reply = await cmd.apply(this.toMappoolRowCmd, this.toCalPPStringCmd, this.apiKey);
             return reply;
         } catch (ex) {
