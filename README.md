@@ -19,8 +19,10 @@ let obi = new OsuBeatmapInfo({
     apiKey: "把你的apikey放这里", // osu Api token，必要
     toMappoolRowCmd: "mappoolrow", // 输出为mappool行格式的指令，可省略，默认为mappoolrow
     toCalPPStringCmd: "calpp", // 输出为谱面详细信息的指令，可省略，默认为calpp
-    prefix: "!", // 指令前缀，必须为单个字符，可省略，默认为!
-    prefix2: "！" // 备用指令前缀，必须为单个字符，可省略，默认为！
+    prefixs: ["!", "！"], // 指令前缀，必须为单个字符，默认为["!", "！"]
+    // 以下只是为了兼容旧版，不再使用
+    // prefix: "!", // 指令前缀，必须为单个字符，可省略，默认为!
+    // prefix2: "！" // 备用指令前缀，必须为单个字符，可省略，默认为！
 })
 
 let reply = await obi.apply(chatMessage); // 字符串格式
